@@ -2,29 +2,25 @@ const express = require("express");
 
 const app = express();
 
-const { adminAuth, userAuth } = require("./middlewares/auth");
-
-app.use("/admin", adminAuth);
-
-app.post("/user/login",(req,res)=>{
-    res.send("User Logged in succesfully!")
-})
-
-app.get("/user", userAuth, (req, res) => {
-  // Logic of checking if the request is authorised
-  res.send("All Data Sent to user");
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    res.status(500).send("Something went wrong!");
+  }
 });
 
-
-
-app.get("/admin/getAllData", (req, res) => {
-  // Logic of checking if the request is authorised
-  res.send("All Data Sent");
+app.get("/getUserData", (req, res) => {
+//   try {
+    throw new Error("igjsidg");
+    res.send("User Data Sent");
+//   } catch (error) {
+//     res.status(500).send("Some Error occured contact support team!");
+//   }
 });
 
-app.get("/admin/deleteUser", (req, res) => {
-  // Logic of fetching all data
-  res.send("User Deleted");
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    res.status(500).send("Something went wrong!");
+  }
 });
 
 app.listen(7777, () => {
